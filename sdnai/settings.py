@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'analysis',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'sdnai.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'sdnai',
+        'NAME': 'ryu-controller',
     }
 }
 
