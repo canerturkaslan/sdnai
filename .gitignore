@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+=======
+.idea
+idea
+IDEA
+sdnai/analysis/__pycache__
+sdnai/analysis/__pycache__/
+sdnai/__pycache__
+sdnai/__pycache__/
+__pycache__
+__pycache__/
+>>>>>>> bc72c99190001dbcbce7d0bbe2326fe0d72cb739
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -126,4 +138,8 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
+<<<<<<< HEAD
 .pyre/
+=======
+.pyre/
+>>>>>>> bc72c99190001dbcbce7d0bbe2326fe0d72cb739
