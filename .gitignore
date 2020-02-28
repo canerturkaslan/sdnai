@@ -3,6 +3,8 @@
 .idea
 idea
 IDEA
+sdnai/analysis/models/__pycache__
+sdnai/analysis/models/__pycache__/
 sdnai/analysis/__pycache__
 sdnai/analysis/__pycache__/
 sdnai/__pycache__

@@ -1,12 +1,11 @@
 from djongo import models
-
+from django import forms
 # Create your models here.
-class Actions(models.Model):
-    name = models.CharField(max_length=200)
 
+class Actions(models.Model):
+    liste = models.CharField(max_length=80)
     class Meta:
         abstract = True
-
 class Match(models.Model):
     dl_dest = models.CharField(max_length=80)
     in_port = models.IntegerField()
@@ -17,7 +16,8 @@ class Match(models.Model):
 
 
 class Flow(models.Model):
-    switch_number= models.IntegerField()
+    _id = models.ObjectIdField()
+    switch_name = models.CharField(max_length=50)
     priority = models.IntegerField()
     duration_sec = models.IntegerField()
     hard_timeout = models.IntegerField()
@@ -35,3 +35,4 @@ class Flow(models.Model):
     match = models.EmbeddedField(
         model_container=Match,
     )
+    objects = models.DjongoManager()
