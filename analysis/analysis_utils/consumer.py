@@ -32,6 +32,7 @@ mydb = client["ryu-controller"]
 for message in consumer2:
     mycol2 = mydb["analysis_flow"]
     message = message.value
+    print(message)
     mycol2.insert_one(message)
 
 

@@ -1,15 +1,17 @@
 from djongo import models
-from django import forms
-# Create your models here.
+
 
 class Actions(models.Model):
-    liste = models.CharField(max_length=80)
+    OUTPUT = models.CharField(max_length=80, blank=True)
+
     class Meta:
         abstract = True
+
+
 class Match(models.Model):
-    dl_dest = models.CharField(max_length=80)
-    in_port = models.IntegerField()
-    dl_src = models.CharField(max_length=80)
+    dl_dst = models.CharField(max_length=80, blank=True)
+    in_port = models.IntegerField(blank=True, max_length=15)
+    dl_src = models.CharField(max_length=80, blank=True)
 
     class Meta:
         abstract = True
@@ -36,3 +38,6 @@ class Flow(models.Model):
         model_container=Match,
     )
     objects = models.DjongoManager()
+
+    def __str__(self):
+        return self.switch_name

@@ -1,4 +1,4 @@
-import json
+from data_parser import *
 import aiohttp
 import asyncio
 from json import dumps
@@ -9,6 +9,16 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                          value_serializer=lambda x:
                          dumps(x).encode('utf-8'))
 
+
+# async def parse_array_object(data):
+#     a = data['actions']
+#     b = str(a)
+#     s = b.replace("[", "{")
+#     c = s.replace("']", "'}")
+#     d = c.replace(":", "':'")
+#     res = ast.literal_eval(d)
+#     data['actions'] = res
+#     return data
 
 
 async def fetch(session):
@@ -29,8 +39,8 @@ async def fetch(session):
                 flows_stats = await resp.json()
 
             flow_count = flows_stats[str(DPID)][0]['flow_count']
-            clean_data_flow = eval(json.dumps(flows))
-            print(clean_data_flow)
+            clean_data_flow = eval(dumps(flows))
+
             for flow in range(flow_count):
 
                 data = clean_data_flow[str(DPID)][flow]
@@ -38,24 +48,21 @@ async def fetch(session):
                 if DPID == 1:
                     name = 'switch_1_flow'
                     data['switch_name'] = name
-                    a = data['actions']
-                    b = str(a)
-                    s = b.replace("[", "{")
-                    c = s.replace("']", "}")
-                    d = c.replace(":", "':")
-                    res = ast.literal_eval(d)
-                    data['actions'] = res
+                    await parse_array_object(data)
+                    data['_id'] = hash_object_id(data)
                     producer.send(name, value=data)
-                    print(data)
+
 
                 elif DPID == 2:
                     name = 'switch_2_flow'
                     data['switch_name'] = name
+                    await parse_array_object(data)
                     producer.send(name, value=data)
 
                 elif DPID == 3:
                     name = 'switch_3_flow'
                     data['switch_name'] = name
+                    await parse_array_object(data)
                     producer.send(name, value=data)
 
                 else:
