@@ -1,3 +1,15 @@
+.idea
+idea
+IDEA
+sdnai/analysis/models/__pycache__
+sdnai/analysis/models/__pycache__/__init__.cpython-37.pyc
+sdnai/analysis/__pycache__
+sdnai/analysis/__pycache__/
+sdnai/__pycache__
+sdnai/__pycache__/
+__pycache__
+__pycache__/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -126,4 +138,6 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
+
 .pyre/
+
