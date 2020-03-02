@@ -28,22 +28,23 @@ consumer2 = KafkaConsumer(
 client = MongoClient('localhost:27017')
 mydb = client["ryu-controller"]
 
-
+sayac=0
 for message in consumer2:
     mycol2 = mydb["analysis_flow"]
     message = message.value
-    print(message)
-    mycol2.insert_one(message)
-
-
+    check_id = message['check_id']
+    mycol2.update_one({'check_id': check_id}, {'$set': message}, upsert=True)
+    sayac+=1
+    print(sayac)
 
 for message in consumer1:
     mycol1 = mydb["analysis_flow"]
     message = message.value
-    mycol1.insert_one(message)
-
+    check_id = message['check_id']
+    mycol1.update_one({'check_id': check_id},{'$set': message},upsert=True)
 
 for message in consumer3:
     mycol3 = mydb["analysis_flow"]
     message = message.value
-    mycol3.insert_one(message)
+    check_id = message['check_id']
+    mycol3.update_one({'check_id': check_id},{'$set': message},upsert=True)

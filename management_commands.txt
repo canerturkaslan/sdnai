@@ -1,0 +1,28 @@
+<< delete_old_topic >>
+
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic switch_3_flow
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic switch_2_flow
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic switch_1_flow
+
+
+<< start zookeper and kafka >>
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
+
+<< start docker image for mininet,ryu >>
+
+docker run -it --rm --privileged -e DISPLAY \
+             -v /tmp/.X11-unix:/tmp/.X11-unix \
+             -v /lib/modules:/lib/modules \
+             iwaseyusuke/ryu-mininet -p 8080:8080 -p 6653:6653
+
+<< start topology >>
+    python topology.py
+
+
+<< start new bash screen for ryu command >>
+docker exec -it (docker_image_number) bash
+
+<< start rest api ryu, simple layer2-3 app >>
+    ryu-manager ryu.app.ofctl_rest ryu.app.simple_switch_13

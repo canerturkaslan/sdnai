@@ -10,24 +10,24 @@ async def parse_array_object(data):
     data['actions'] = res
     return data
 
-def hash_object_id(hash_data):
-    data=hash_data
-    set_hash_id=''
-    object_id = hashlib.md5()
-    if "duration_sec" and "duration_nsec" in hash_data:
-        del hash_data["duration_sec"]
-        del hash_data["duration_nsec"]
-        hash_data['actions'] = hash_data['actions']['OUTPUT']
-        hash_data['dl_dst'] = hash_data['match']['dl_dst']
-        hash_data['dl_src'] = hash_data['match']['dl_src']
-        hash_data['in_port'] = hash_data['match']['in_port']
-    if 'match' in hash_data:
-        del hash_data["match"]
-    for key, value in hash_data.items():
-        # set_hash_id = set_hash_id + str(v)
+def hash_object_id(data):
+    object_id = hashlib.blake2b(digest_size=12)
+    if "duration_sec" and "duration_nsec" in data:
+        if data['match'].__len__() is 0:
+            print ("Match is none so it won't be hashed")
+            del data["match"]
+        else:
+            data['dl_dest'] = data['match']['dl_dst']
+            data['dl_source'] = data['match']['dl_src']
+            data['in_port'] = data['match']['in_port']
+            del data["match"]
+        del data["duration_sec"]
+        del data["duration_nsec"]
+        data['actions'] = data['actions']['OUTPUT']
+
+    for key, value in data.items():
         if type(value) is not int:
             object_id.update(value.encode('utf-8'))
         else:
-
             object_id.update(str(value).encode("utf-8"))
-    return (str(object_id.hexdigest()))
+    return str(object_id.hexdigest())
