@@ -6,7 +6,8 @@ class Actions(models.Model):
 
     class Meta:
         abstract = True
-
+    def __str__(self):
+        return self.OUTPUT
 
 class Match(models.Model):
     dl_dst = models.CharField(max_length=80, blank=True)

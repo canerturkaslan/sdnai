@@ -26,9 +26,8 @@ def hash_object_id(data):
         data['actions'] = data['actions']['OUTPUT']
 
     for key, value in data.items():
-        # set_hash_id = set_hash_id + str(v)
         if type(value) is not int:
             object_id.update(value.encode('utf-8'))
         else:
             object_id.update(str(value).encode("utf-8"))
-    return (str(object_id.hexdigest()))
+    return str(object_id.hexdigest())
