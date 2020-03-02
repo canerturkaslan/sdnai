@@ -1,9 +1,10 @@
-from data_parser import *
 import aiohttp
 import asyncio
 from json import dumps
 from kafka import KafkaProducer
 import ast
+from analysis.analysis_utils.data_parser import hash_object_id,parse_array_object
+
 
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                          value_serializer=lambda x:
@@ -49,7 +50,8 @@ async def fetch(session):
                     name = 'switch_1_flow'
                     data['switch_name'] = name
                     await parse_array_object(data)
-                    data['_id'] = hash_object_id(data)
+                    instance_data = data.copy()
+                    data['_id'] = hash_object_id(instance_data)
                     producer.send(name, value=data)
 
 
@@ -57,12 +59,16 @@ async def fetch(session):
                     name = 'switch_2_flow'
                     data['switch_name'] = name
                     await parse_array_object(data)
+                    instance_data = data.copy()
+                    data['_id'] = hash_object_id(instance_data)
                     producer.send(name, value=data)
 
                 elif DPID == 3:
                     name = 'switch_3_flow'
                     data['switch_name'] = name
                     await parse_array_object(data)
+                    instance_data = data.copy()
+                    data['_id'] = hash_object_id(instance_data)
                     producer.send(name, value=data)
 
                 else:

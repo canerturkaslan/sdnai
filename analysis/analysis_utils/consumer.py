@@ -32,18 +32,17 @@ mydb = client["ryu-controller"]
 for message in consumer2:
     mycol2 = mydb["analysis_flow"]
     message = message.value
-    print(message)
-    mycol2.insert_one(message)
-
-
+    object_id = message['_id']
+    mycol2.update_one({'_id': object_id}, {'$set': message}, upsert=True)
 
 for message in consumer1:
     mycol1 = mydb["analysis_flow"]
     message = message.value
-    mycol1.insert_one(message)
-
+    object_id = message['_id']
+    mycol1.update_one({'_id': object_id},{'$set': message},upsert=True)
 
 for message in consumer3:
     mycol3 = mydb["analysis_flow"]
     message = message.value
-    mycol3.insert_one(message)
+    object_id = message['_id']
+    mycol3.update_one({'_id': object_id},{'$set': message},upsert=True)
