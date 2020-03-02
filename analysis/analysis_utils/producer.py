@@ -51,7 +51,7 @@ async def fetch(session):
                     data['switch_name'] = name
                     await parse_array_object(data)
                     instance_data = data.copy()
-                    data['_id'] = hash_object_id(instance_data)
+                    data['check_id'] = hash_object_id(instance_data)
                     producer.send(name, value=data)
 
 
@@ -60,7 +60,7 @@ async def fetch(session):
                     data['switch_name'] = name
                     await parse_array_object(data)
                     instance_data = data.copy()
-                    data['_id'] = hash_object_id(instance_data)
+                    data['check_id'] = hash_object_id(instance_data)
                     producer.send(name, value=data)
 
                 elif DPID == 3:
@@ -68,7 +68,7 @@ async def fetch(session):
                     data['switch_name'] = name
                     await parse_array_object(data)
                     instance_data = data.copy()
-                    data['_id'] = hash_object_id(instance_data)
+                    data['check_id'] = hash_object_id(instance_data)
                     producer.send(name, value=data)
 
                 else:
