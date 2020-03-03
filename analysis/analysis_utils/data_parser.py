@@ -14,7 +14,6 @@ def hash_object_id(data):
     object_id = hashlib.blake2b(digest_size=12)
     if "duration_sec" and "duration_nsec" in data:
         if data['match'].__len__() is 0:
-            print ("Match is none so it won't be hashed")
             del data["match"]
         else:
             data['dl_dest'] = data['match']['dl_dst']

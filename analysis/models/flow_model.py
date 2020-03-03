@@ -39,6 +39,7 @@ class Flow(models.Model):
     match = models.EmbeddedField(
         model_container=Match,
     )
+    created_at = models.DateTimeField(auto_now_add=True)
     objects = models.DjongoManager()
 
     def __str__(self):

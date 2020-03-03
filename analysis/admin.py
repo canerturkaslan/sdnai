@@ -6,7 +6,7 @@ from .models.flow_model import Flow,Actions
 @admin.register(Flow)
 class FlowAdmin(admin.ModelAdmin):
 
-    list_display = ('switch_name', 'actions__OUTPUT', 'match__dl_dst','match__dl_src','match__in_port','byte_count','packet_count','table_id','priority','duration_sec')
+    list_display = ('switch_name', 'actions__OUTPUT', 'match__dl_dst','match__dl_src','match__in_port','byte_count','packet_count','table_id','priority','created_at')
     search_fields = ('switch_name','byte_count','packet_count','table_id','priority','actions')
 
     def actions__OUTPUT(self,obj):

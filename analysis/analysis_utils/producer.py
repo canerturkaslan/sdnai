@@ -38,25 +38,24 @@ async def fetch(session):
                     data = clean_data_flow[str(DPID)][flow]
 
                     if DPID == 1:
-                        name = 'switch_1_flow'
-                        data['switch_name'] = name
+                        name = 'analysis_flow'
+                        data['switch_name'] = 'switch_1_flow'
                         await parse_array_object(data)
                         instance_data = data.copy()
                         data['check_id'] = hash_object_id(instance_data)
                         producer.send(name, value=data)
 
-
                     elif DPID == 2:
-                        name = 'switch_2_flow'
-                        data['switch_name'] = name
+                        name = 'analysis_flow'
+                        data['switch_name'] = 'switch_2_flow'
                         await parse_array_object(data)
                         instance_data = data.copy()
                         data['check_id'] = hash_object_id(instance_data)
                         producer.send(name, value=data)
 
                     elif DPID == 3:
-                        name = 'switch_3_flow'
-                        data['switch_name'] = name
+                        name = 'analysis_flow'
+                        data['switch_name'] = 'switch_3_flow'
                         await parse_array_object(data)
                         instance_data = data.copy()
                         data['check_id'] = hash_object_id(instance_data)
