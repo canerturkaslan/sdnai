@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models.flow_model import Flow,Actions
+from .models.port_model import Port
 
 
 
@@ -21,3 +22,9 @@ class FlowAdmin(admin.ModelAdmin):
     def match__dl_src(self,obj):
         return obj.match.dl_src
 
+@admin.register(Port)
+class PortAdmin(admin.ModelAdmin):
+    list_display = ('name', 'mac_addr', 'rx_crc_err','tx_bytes','rx_dropped','port_no','rx_over_err',
+                    'rx_frame_err','rx_bytes','tx_errors','duration_nsec',
+                    'collisions','duration_sec','rx_errors','tx_packets','curr','tx_dropped','rx_packets','created_at')
+    search_fields = ('mac_addr', 'name')

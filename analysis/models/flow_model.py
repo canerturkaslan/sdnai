@@ -20,7 +20,7 @@ class Match(models.Model):
 
 class Flow(models.Model):
     _id = models.ObjectIdField()
-    check_id=models.CharField(max_length=24)
+    check_id = models.CharField(max_length=24)
     switch_name = models.CharField(max_length=50)
     priority = models.IntegerField()
     duration_sec = models.IntegerField()

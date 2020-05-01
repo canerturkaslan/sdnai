@@ -30,3 +30,17 @@ def hash_object_id(data):
         else:
             object_id.update(str(value).encode("utf-8"))
     return str(object_id.hexdigest())
+
+def clean_port_data(desc_data,port_data):
+    del desc_data['state']
+    del desc_data['config']
+    del desc_data['peer']
+    del desc_data['advertised']
+    del desc_data['supported']
+    del desc_data['max_speed']
+    del desc_data['port_no']
+    port_data['name'] = desc_data['name']
+    port_data['mac_addr'] = desc_data['hw_addr']
+    port_data['curr'] = desc_data['curr']
+    port_data['curr_speed'] = desc_data['curr_speed']
+    return port_data
