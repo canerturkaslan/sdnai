@@ -20,7 +20,7 @@ class Match(models.Model):
 
 class Flow(models.Model):
     _id = models.ObjectIdField()
-    check_id=models.CharField(max_length=24)
+    check_id = models.CharField(max_length=24)
     switch_name = models.CharField(max_length=50)
     priority = models.IntegerField()
     duration_sec = models.IntegerField()
@@ -39,6 +39,7 @@ class Flow(models.Model):
     match = models.EmbeddedField(
         model_container=Match,
     )
+    created_at = models.DateTimeField(auto_now_add=True)
     objects = models.DjongoManager()
 
     def __str__(self):

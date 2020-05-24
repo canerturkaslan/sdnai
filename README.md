@@ -1,2 +1,2 @@
 # sdnai
-machine learning based SDN applications (ryu, apache kafka, apache spark, mongodb, django, python, mininet)
+SDN applications (ryu, apache kafka, mongodb, django, python, mininet)
